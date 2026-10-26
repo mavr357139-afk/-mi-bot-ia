@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#10172c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Mi Bot IA">
+  <meta name="description" content="Asistente personal de IA que se ejecuta en el navegador, sin API de pago.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-180.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Mi Bot IA</title>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="logo" aria-hidden="true">✦</div>
+      <div><strong>Mi Bot IA</strong><small>Tu asistente local</small></div>
+    </div>
+    <button id="settingsButton" class="iconbutton" aria-label="Abrir configuración" title="Configuración">⚙</button>
+  </header>
+
+  <section class="banner" aria-live="polite">
+    <span class="signal" id="signal"></span>
+    <div class="statuscontent"><strong id="statusTitle">IA sin cargar</strong><small id="statusText">Elige un modelo y pulsa «Cargar IA».</small></div>
+    <button id="loadButton" class="primary small">Cargar IA</button>
+  </section>
+  <div class="progresswrap" id="progressWrap" hidden><div id="progressBar" class="progressbar"></div></div>
+
+  <main id="chat" class="chat" aria-live="polite" aria-label="Conversación">
+    <div class="welcome"><div class="welcomeicon">✦</div><h1>Hola, soy Mi Bot IA</h1>
+      <p>Tu asistente personal, ejecutado en este dispositivo y sin API de pago.</p>
+      <p class="muted">Carga primero un modelo. El inicial es pequeño y puede equivocarse, especialmente en español.</p>
+    </div>
+  </main>
+
+  <form id="composer" class="composer">
+    <label class="sr-only" for="message">Escribe tu mensaje</label>
+    <textarea id="message" rows="1" maxlength="1400" placeholder="Escribe un mensaje…" required></textarea>
+    <button id="sendButton" class="send" type="submit" title="Enviar mensaje" aria-label="Enviar">➤</button>
+  </form>
+  <footer>Respuestas generadas por IA pequeña: comprueba la información importante.</footer>
+</div>
+
+<dialog id="settingsDialog" class="modal">
+  <form method="dialog"><div class="modalhead"><h2>Configuración</h2><button class="iconbutton" aria-label="Cerrar configuración">✕</button></div></form>
+  <div class="modalbody">
+    <label for="modelSelect">Modelo de IA</label>
+    <select id="modelSelect">
+      <option value="small">Ligero • SmolLM2 135M (inglés principalmente)</option>
+      <option value="spanish">Mejor español • Qwen2.5 0.5B (descarga grande)</option>
+    </select>
+    <div class="hint" id="modelHelp">Ligero para probar: 118–137 MB aprox. según el método de ejecución.</div>
+    <label for="personality">Personalidad / instrucciones del bot</label>
+    <textarea id="personality" rows="5" maxlength="1800"></textarea>
+    <div class="hint">Esta instrucción modifica el comportamiento, pero no garantiza que siempre la siga.</div>
+    <button id="saveSettings" class="secondary full" type="button">Guardar cambios</button>
+    <div class="divider"></div>
+    <button id="exportChat" class="secondary full" type="button">Exportar conversación (.txt)</button>
+    <button id="clearChat" class="danger full" type="button">Eliminar conversación del iPhone</button>
+    <p class="legal">La conversación se guarda solo en el almacenamiento local de este navegador. No subas datos personales de pacientes. Safari puede borrar sus datos si se agota el almacenamiento o los eliminas desde Ajustes.</p>
+  </div>
+</dialog>
+<script type="module" src="./app.js"></script>
+</body>
+</html>
